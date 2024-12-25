@@ -166,6 +166,7 @@ const Orders = () => {
                           currency: "VND",
                         })}
                       </td>
+          
                     </tr>
                   );
                 })}

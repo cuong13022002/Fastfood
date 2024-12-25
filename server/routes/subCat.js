@@ -15,7 +15,7 @@ router.get(`/`, async (req, res) => {
 
         
         if (page > totalPages) {
-            return res.status(404).json({ message: "No data found!" })
+            return res.status(404).json({ message: "Dữ liệu không tìm thấy!" })
         }
 
   
@@ -106,14 +106,14 @@ router.delete('/:id', async (req, res) => {
 
     if (!deletedSubCat) {
         res.status(404).json({
-            message: 'Sub Category not found!',
+            message: 'Không tìm thấy!',
             success: false
         })
     }
 
     res.status(200).json({
         success: true,
-        message: 'Sub Category Deleted!'
+        message: 'Xoá thành công!'
     })
 });
 
@@ -133,7 +133,7 @@ router.put('/:id', async (req, res) => {
 
     if (!subCat) {
         return res.status(500).json({
-            message: 'Sub Category cannot be updated!',
+            message: 'Cập nhật không thành công!',
             success: false
         })
     }

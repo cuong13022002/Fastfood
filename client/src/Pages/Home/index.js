@@ -454,9 +454,6 @@ const Home = () => {
             </>
           )}
       </div>
-      <div className="container">
-       {/* <img className="w-100" src="https://klbtheme.com/bacola/wp-content/plugins/bacola-core/elementor/images/banner-box2.jpg"/> */}
-      </div>
       <div className="container mt-3">
         <h3 className="mb-4">Tin tức mới nhất</h3>
         <div className="row">

@@ -275,7 +275,7 @@ router.post(`/authWithGoogle`, async (req, res) => {
             return res.status(200).send({
                  user:result,
                  token:token,
-                 msg:"Người dùng đăng nhập thành công!"
+                 msg:"Đăng nhập thành công!"
              })
     
         }
@@ -287,7 +287,7 @@ router.post(`/authWithGoogle`, async (req, res) => {
             return res.status(200).send({
                  user:existingUser,
                  token:token,
-                 msg:"Người dùng đăng nhập thành công!"
+                 msg:"Đăng nhập thành công!"
              })
         }
       
@@ -328,45 +328,9 @@ router.put('/:id',async (req, res)=> {
 })
 
 
-// router.put('/:id',async (req, res)=> {
-
-//     const { name, phone, email, password } = req.body;
-
-//     const userExist = await User.findById(req.params.id);
-
-//     let newPassword
-    
-//     if(req.body.password) {
-//         newPassword = bcrypt.hashSync(req.body.password, 10)
-//     } else {
-//         newPassword = userExist.passwordHash;
-//     }
-
-//     const user = await User.findByIdAndUpdate(
-//         req.params.id,
-//         {
-//             name:name,
-//             phone:phone,
-//             email:email,
-//             password:newPassword,
-//             images: imagesArr,
-//         },
-//         { new: true}
-//     )
-
-//     if(!user)
-//     return res.status(400).send('the user cannot be Updated!')
-
-//     res.send(user);
-// })
-
-
 
 router.delete('/deleteImage', async (req, res) => {
     const imgUrl = req.query.img;
-
-   // console.log(imgUrl)
-
     const urlArr = imgUrl.split('/');
     const image =  urlArr[urlArr.length-1];
   

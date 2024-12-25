@@ -70,14 +70,14 @@ router.delete('/:id', async (req, res) => {
 
     if (!deletedItem) {
         res.status(404).json({
-            message: 'item not found!',
+            message: 'Không tìm thấy!',
             success: false
         })
     }
 
     res.status(200).json({
         success: true,
-        message: 'Item Deleted!'
+        message: 'Xoá thành công!'
     })
 });
 

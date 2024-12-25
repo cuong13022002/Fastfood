@@ -27,8 +27,6 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}_${file.originalname}`);
-    //imagesArr.push(`${Date.now()}_${file.originalname}`)
-    //console.log(file.originalname)
   },
 });
 
@@ -74,7 +72,7 @@ router.get(`/`, async (req, res) => {
   const totalPages = Math.ceil(totalPosts / perPage);
 
   if (page > totalPages) {
-    return res.status(404).json({ message: "Page not found" });
+    return res.status(404).json({ message: "Không tìm thấy trang" });
   }
 
   let productList = [];
@@ -120,7 +118,7 @@ router.get(`/catName`, async (req, res) => {
   const totalPages = Math.ceil(totalPosts / perPage);
 
   if (page > totalPages) {
-    return res.status(404).json({ message: "Page not found" });
+    return res.status(404).json({ message: "Không tìm thấy trang" });
   }
 
   if (req.query.page !== undefined && req.query.perPage !== undefined) {
@@ -176,7 +174,7 @@ router.get(`/catId`, async (req, res) => {
   const totalPages = Math.ceil(totalPosts / perPage);
 
   if (page > totalPages) {
-    return res.status(404).json({ message: "Page not found" });
+    return res.status(404).json({ message: "Không tìm thấy trang" });
   }
 
   if (req.query.page !== undefined && req.query.perPage !== undefined) {
@@ -195,7 +193,6 @@ router.get(`/catId`, async (req, res) => {
     productListArr = await Product.find({ catId: req.query.catId });
 
     for (let i = 0; i < productListArr.length; i++) {
-      //console.log(productList[i].location)
       for (let j = 0; j < productListArr[i].location.length; j++) {
         if (productListArr[i].location[j].value === req.query.location) {
           productList.push(productListArr[i]);
@@ -203,7 +200,7 @@ router.get(`/catId`, async (req, res) => {
       }
     }
 
-    if (req.query.location !== "All" && req.query.location!==undefined) {
+    if (req.query.location !== "All" && req.query.location !== undefined) {
       return res.status(200).json({
         products: productList,
         totalPages: totalPages,
@@ -216,10 +213,6 @@ router.get(`/catId`, async (req, res) => {
         page: page,
       });
     }
-
-
-   
-
   }
 });
 
@@ -232,7 +225,7 @@ router.get(`/subCatId`, async (req, res) => {
   const totalPages = Math.ceil(totalPosts / perPage);
 
   if (page > totalPages) {
-    return res.status(404).json({ message: "Page not found" });
+    return res.status(404).json({ message: "Không tìm thấy trang" });
   }
 
   if (req.query.page !== undefined && req.query.perPage !== undefined) {
@@ -589,14 +582,14 @@ router.delete("/:id", async (req, res) => {
 
   if (!deletedProduct) {
     res.status(404).json({
-      message: "Product not found!",
+      message: "Khômg tìm thấy sản phẩm!",
       success: false,
     });
   }
 
   res.status(200).json({
     success: true,
-    message: "Product Deleted!",
+    message: "Xoá sản phẩm thành công",
   });
 });
 
@@ -631,7 +624,7 @@ router.put("/:id", async (req, res) => {
 
   if (!product) {
     res.status(404).json({
-      message: "the product can not be updated!",
+      message: "Sản phẩm chưa được cập nhật!",
       status: false,
     });
   }
@@ -639,248 +632,11 @@ router.put("/:id", async (req, res) => {
   imagesArr = [];
 
   res.status(200).json({
-    message: "the product is updated!",
+    message: "Cập nhật thành công!",
     status: true,
   });
 
-  //res.send(product);
 });
 
-// router.get(`/`, async (req, res) => {
-//   const page = parseInt(req.query.page) || 1;
-//   const perPage = parseInt(req.query.perPage);
-//   const totalPosts = await Product.countDocuments();
-//   const totalPages = Math.ceil(totalPosts / perPage);
-
-//   if (page > totalPages) {
-//     return res.status(404).json({ message: "Page not found" });
-//   }
-
-//   let productList = [];
-
-//   if (req.query.minPrice !== undefined && req.query.maxPrice !== undefined) {
-//     if (
-//       req.query.subCatId !== undefined &&
-//       req.query.subCatId !== null &&
-//       req.query.subCatId !== ""
-//     ) {
-//       if (
-//         req.query.location !== undefined &&
-//         req.query.location !== null &&
-//         req.query.location !== "All"
-//       ) {
-//         productList = await Product.find({
-//           subCatId: req.query.subCatId,
-//           location: req.query.location,
-//         })
-//           .populate("category")
-//           .skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//       } else {
-//         productList = await Product.find({
-//           subCatId: req.query.subCatId,
-//         })
-//           .populate("category")
-//           .skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//       }
-//     }
-
-//     if (
-//       req.query.catId !== undefined &&
-//       req.query.catId !== null &&
-//       req.query.catId !== ""
-//     ) {
-//       if (
-//         req.query.location !== undefined &&
-//         req.query.location !== null &&
-//         req.query.location !== "All"
-//       ) {
-//         productList = await Product.find({
-//           catId: req.query.catId,
-//           location: req.query.location,
-//         })
-//           .populate("category")
-//           .skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//       } else {
-//         productList = await Product.find({ catId: req.query.catId })
-//           .populate("category")
-//           .skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//       }
-//     }
-
-//     const filteredProducts = productList.filter((product) => {
-//       if (req.query.minPrice && product.price < parseInt(+req.query.minPrice)) {
-//         return false;
-//       }
-//       if (req.query.maxPrice && product.price > parseInt(+req.query.maxPrice)) {
-//         return false;
-//       }
-//       return true;
-//     });
-
-//     if (!productList) {
-//       res.status(500).json({ success: false });
-//     }
-//     return res.status(200).json({
-//       products: filteredProducts,
-//       totalPages: totalPages,
-//       page: page,
-//     });
-//   } else if (req.query.page !== undefined && req.query.perPage !== undefined) {
-//     if (
-//       req.query.location !== undefined &&
-//       req.query.location !== null &&
-//       req.query.location !== "All"
-//     ) {
-//       productList = await Product.find({ location: req.query.location })
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     } else {
-//       productList = await Product.find()
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     }
-
-//     if (!productList) {
-//       res.status(500).json({ success: false });
-//     }
-//     return res.status(200).json({
-//       products: productList,
-//       totalPages: totalPages,
-//       page: page,
-//     });
-//   } else {
-//     if (
-//       req.query.location !== undefined &&
-//       req.query.location !== null &&
-//       req.query.location !== "All"
-//     ) {
-//       productList = await Product.find(req.query)
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     } else if (
-//       req.query.catId !== "" &&
-//       req.query.catId !== null &&
-//       req.query.catId !== undefined
-//     ) {
-//       productList = await Product.find({ catId: req.query.catId })
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     } else if (
-//       req.query.catName !== "" &&
-//       req.query.catName !== null &&
-//       req.query.catName !== undefined
-//     ) {
-//       productList = await Product.find({ catName: req.query.catName })
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     } else if (
-//       req.query.subCatId !== "" &&
-//       req.query.subCatId !== null &&
-//       req.query.subCatId !== undefined
-//     ) {
-//       productList = await Product.find({
-//         subCatId: req.query.subCatId,
-//       })
-//         .populate("category")
-//         .skip((page - 1) * perPage)
-//         .limit(perPage)
-//         .exec();
-//     }
-
-//     if (
-//       req.query.rating !== "" &&
-//       req.query.rating !== null &&
-//       req.query.rating !== undefined
-//     ) {
-//       if (
-//         req.query.catId !== "" &&
-//         req.query.catId !== null &&
-//         req.query.catId !== undefined
-//       ) {
-//         if (
-//           req.query.location !== undefined &&
-//           req.query.location !== null &&
-//           req.query.location !== "All"
-//         ) {
-//           productList = await Product.find({
-//             rating: req.query.rating,
-//             catId: req.query.catId,
-//             location: req.query.location,
-//           }).populate("category").skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//         } else {
-//           productList = await Product.find({
-//             rating: req.query.rating,
-//             catId: req.query.catId,
-//           }).populate("category").skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//         }
-//       }
-//     }
-
-//     if (
-//       req.query.rating !== "" &&
-//       req.query.rating !== null &&
-//       req.query.rating !== undefined
-//     ) {
-//       if (
-//         req.query.subCatId !== "" &&
-//         req.query.subCatId !== null &&
-//         req.query.subCatId !== undefined
-//       ) {
-//         if (
-//           req.query.location !== undefined &&
-//           req.query.location !== null &&
-//           req.query.location !== "All"
-//         ) {
-//           productList = await Product.find({
-//             rating: req.query.rating,
-//             subCatId: req.query.subCatId,
-//             location: req.query.location,
-//           }).populate("category").skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//         } else {
-//           productList = await Product.find({
-//             rating: req.query.rating,
-//             subCatId: req.query.subCatId,
-//           }).populate("category").skip((page - 1) * perPage)
-//           .limit(perPage)
-//           .exec();
-//         }
-//       }
-//     }
-
-//     if (!productList) {
-//       res.status(500).json({ success: false });
-//     }
-
-//     return res.status(200).json({
-//       products: productList,
-//       totalPages: totalPages,
-//       page: page,
-//     });
-//   }
-// });
 
 module.exports = router;

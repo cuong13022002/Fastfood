@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/logo.jpg";
+import Logo from "../../assets/images/Fastfood.png";
+import logo1 from "../../assets/images/deliveryman.png";
 import Button from "@mui/material/Button";
 import CountryDropdown from "../CountryDropdown";
 import { FiUser } from "react-icons/fi";
@@ -10,6 +11,7 @@ import Navigation from "./Navigation";
 import { useContext } from "react";
 import { MyContext } from "../../App";
 import { FaFacebookMessenger } from "react-icons/fa";
+import { SiShopee } from "react-icons/si";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -154,9 +156,10 @@ const Header = () => {
                     </Button>
                   )}
 
-                  <Link to={"/"} className="logo">
-                    <img src={Logo} alt="Logo" />
-                  </Link>
+                   <Link to={"/"} className="d-flex align-items-center logo">
+                                  <img src={logo1} />
+                                  <span className="ml-2">FASTFOOD</span>
+                                </Link>
 
                   {context.windowWidth < 992 && (
                     <div className="position-relative cartTab">

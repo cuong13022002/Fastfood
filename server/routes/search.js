@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
       res.json(items);
     }
   } catch (err) {
-    res.status(500).json({ msg: "Server error" });
+    res.status(500).json({ msg: "Lỗi máy chủ" });
   }
 });
 
