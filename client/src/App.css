@@ -1,14 +1,10 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css");
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
   overflow-x: hidden;
@@ -27,6 +23,46 @@ body {
   .container-xl {
     max-width: 1280px;
   }
+}
+
+.timer {
+  margin: 0;
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-fashion-food-poster-background-image_159294.jpg");
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  color: rgb(22, 15, 15);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  text-align: center;
+}
+.countdown {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 2.5rem;
+}
+
+.time-unit {
+  background: #ffff;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  margin: 0 14px;
+}
+
+.time-unit span {
+  display: block;
+  font-size: 0.5em;
+  color: #2bbef9;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
 .css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
@@ -63,6 +99,19 @@ button {
   text-transform: capitalize !important;
 }
 
+.bg-danger-subtle {
+  border-radius: 10px;
+  background-color: #FFEEF2;
+  padding: 30px;
+  text-transform:uppercase;
+  text-decoration: none;
+}
+.bg-danger-subtle a{
+  color: #ED174A !important;
+  font-size: larger;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+}
 .btn-blue {
   background: #233a95 !important;
   color: #fff !important;
@@ -515,6 +564,8 @@ nav .navPart2{max-width: 80%; flex: 0 0 0%;} */
 
 nav .navPart1 .catWrapper {
   position: relative;
+  font-family: "Arial", sans-serif;
+  
 }
 nav .navPart1 .catWrapper .sidebarNav {
   width: 100%;

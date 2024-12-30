@@ -9,7 +9,6 @@ import Rating from '@mui/material/Rating';
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [products, setproducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [value, setValue] = useState(2);
 
   const [isOpenModal, setIsOpenModal] = useState(false);

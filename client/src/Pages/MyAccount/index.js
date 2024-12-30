@@ -10,10 +10,8 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import {
   deleteData,
-  deleteImages,
   editData,
   fetchDataFromApi,
-  postData,
   uploadImage,
 } from "../../utils/api";
 
@@ -115,7 +113,6 @@ const MyAccount = () => {
       });
     });
 
-    
     context.setEnableFilterTab(false);
   }, []);
 
@@ -145,9 +142,7 @@ const MyAccount = () => {
 
       setUploading(true);
 
-      //const fd = new FormData();
       for (var i = 0; i < files.length; i++) {
-        // Validate file type
         if (
           files[i] &&
           (files[i].type === "image/jpeg" ||
@@ -162,7 +157,7 @@ const MyAccount = () => {
           context.setAlertBox({
             open: true,
             error: true,
-            msg: "Please select a valid JPG or PNG image file.",
+            msg: "Vui lòng chọn tệp hình ảnh JPG hoặc PNG hợp lệ.",
           });
 
           return false;
@@ -188,7 +183,7 @@ const MyAccount = () => {
               item?.images.length !== 0 &&
                 item?.images?.map((img) => {
                   img_arr.push(img);
-                  //console.log(img)
+                 
                 });
             });
 
@@ -210,7 +205,7 @@ const MyAccount = () => {
               email: res?.email,
               phone: res?.phone,
               images: uniqueArray,
-              isAdmin: res?.isAdmin
+              isAdmin: res?.isAdmin,
             };
 
             editData(`/api/user/${user?.userId}`, data).then((res) => {
@@ -220,7 +215,7 @@ const MyAccount = () => {
                 context.setAlertBox({
                   open: true,
                   error: false,
-                  msg: "Images Uploaded!",
+                  msg: "Hình ảnh đã tải lên!",
                 });
                 setUploading(false);
               }, 200);
@@ -282,7 +277,7 @@ const MyAccount = () => {
     if (
       fields.oldPassword !== "" &&
       fields.password !== "" &&
-      fields.confirmPassword !== ""&&
+      fields.confirmPassword !== "" &&
       previews.length !== 0
     ) {
       if (fields.password !== fields.confirmPassword) {

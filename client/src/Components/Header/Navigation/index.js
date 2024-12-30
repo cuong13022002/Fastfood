@@ -49,7 +49,7 @@ const Navigation = (props) => {
                 <span className="icon1 mr-2 mt-0">
                   <IoIosMenu />
                 </span>
-                <span className="text text-uppercase mt-1">Danh mục thực phẩm </span>
+                <span className="text text-uppercase mt-1">Danh mục thực phẩm</span>
                 <span className="icon2  ml-2">
                   <FaAngleDown />
                 </span>

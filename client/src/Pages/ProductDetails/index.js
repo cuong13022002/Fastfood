@@ -133,14 +133,14 @@ const ProductDetails = () => {
         context.setAlertBox({
           open: true,
           error: true,
-          msg: "Please add a Review",
+          msg: "Vui lòng thêm đánh giá",
         });
       }
     } else {
       context.setAlertBox({
         open: true,
         error: true,
-        msg: "Please Login first",
+        msg: "Vui lòng đăng nhập",
       });
     }
   };
@@ -294,8 +294,7 @@ const ProductDetails = () => {
                   <span className="badge badge-danger">Hết hàng</span>
                 )}
 
-                {/* <p className="mt-3">{productData?.description}</p> */}
-
+{/* 
                 {productData?.productRam?.length !== 0 && (
                   <div className="productSize d-flex align-items-center">
                     <span>RAM:</span>
@@ -346,7 +345,7 @@ const ProductDetails = () => {
                       })}
                     </ul>
                   </div>
-                )}
+                )} */}
 
                 {productData?.productWeight?.length !== 0 && (
                   <div className="productSize d-flex align-items-center">
@@ -412,11 +411,7 @@ const ProductDetails = () => {
                       </Button>
                     </Tooltip>
 
-                    {/* <Tooltip title="Add to Compare" placement="top">
-                      <Button className="btn-blue btn-lg btn-big btn-circle ml-2">
-                        <MdOutlineCompareArrows />
-                      </Button>
-                    </Tooltip> */}
+                 
                   </div>
                 </div>
               </div>

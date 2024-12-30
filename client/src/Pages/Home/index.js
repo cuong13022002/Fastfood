@@ -109,7 +109,6 @@ const Home = () => {
       });
     }
   }, [context.categoryData]);
-
   useEffect(() => {
     if (selectedCat !== undefined) {
       setIsLoading(true);
@@ -123,6 +122,35 @@ const Home = () => {
       });
     }
   }, [selectedCat]);
+  // Countdownt
+  const calculateTimeLeft = () => {
+    const targetDate = new Date("2025-01-12T00:00:00"); // Set your target date here
+    const now = new Date();
+    let difference = targetDate - now;
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        ),
+        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((difference % (1000 * 60)) / 1000),
+      };
+    }
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
 
   return (
     <>
@@ -140,6 +168,27 @@ const Home = () => {
         <HomeCat catData={context.categoryData} />
       )}
 
+      <div className="container countdowns mt-3">
+        <div className="">
+          <h3 className="mb-3 hd">ƯU ĐÃI ĐẶC BIỆT CUỐI NĂM </h3>
+          <div className="timer">
+            <div className="countdown ">
+              <div className="time-unit">
+                {timeLeft.days || 0} <span> Ngày</span>
+              </div>
+              <div className="time-unit">
+                {timeLeft.hours || 0} <span> Giờ</span>
+              </div>
+              <div className="time-unit">
+                {timeLeft.minutes || 0} <span> Phút</span>
+              </div>
+              <div className="time-unit">
+                {timeLeft.seconds || 0} <span> Giây</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section className="homeProducts pb-0">
         <div className="container">
           <div className="row homeProductsRow">
@@ -454,8 +503,17 @@ const Home = () => {
             </>
           )}
       </div>
-      <div className="container mt-3">
-        <h3 className="mb-4">Tin tức mới nhất</h3>
+
+      <div className="container">
+        <div className="text-center bg-danger-subtle ">
+          <Link to="#">Tiết kiệm thêm 5-10% cho mỗi đơn hàng </Link>
+        </div>
+      </div>
+      <div className="container mt-4">
+        <h3 className="mb-4 hd">Tin tức mới nhất</h3>
+        {/* <p className="text-light text-sml mb-0">
+          Đừng bỏ lỡ các ưu đãi hiện tại cho đến cuối tháng 12.
+        </p> */}
         <div className="row">
           <div className="col-md-4  ">
             <Link to="#">
@@ -465,7 +523,8 @@ const Home = () => {
               />
 
               <h4 className="mt-4">
-              Sản Phẩm Nafoods Trưng Bày Tại Diễn Đàn Chuyển Hóa Lãnh Đạo & Tổ Chức
+                Sản Phẩm Nafoods Trưng Bày Tại Diễn Đàn Chuyển Hóa Lãnh Đạo & Tổ
+                Chức
               </h4>
               <p>Tháng 12 2024, 3 Bình luận </p>
             </Link>
@@ -476,7 +535,10 @@ const Home = () => {
                 src="https://file.hstatic.net/1000359458/article/cac-loai-hat-dieu_fe338176c56e4f998c35a85c1342e664.jpg"
                 className="w-100 rounded-3"
               />
-              <h4 className="mt-4">Hạt Điều Có Mấy Loại? Cách Phân Loại Hạt Điều Trên Thị Trường Hiện Nay?</h4>
+              <h4 className="mt-4">
+                Hạt Điều Có Mấy Loại? Cách Phân Loại Hạt Điều Trên Thị Trường
+                Hiện Nay?
+              </h4>
               <p className="">Tháng 12 2024, 3 Bình luận </p>
             </Link>
           </div>
@@ -487,7 +549,8 @@ const Home = () => {
                 className="w-100 rounded-3"
               />
               <h4 className="mt-4">
-              Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
+                Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ
+                Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
               </h4>
               <p>Tháng 12 2024, 3 Bình luận </p>
             </Link>
@@ -499,7 +562,8 @@ const Home = () => {
                 className="w-100 rounded-3"
               />
               <h4 className="mt-4">
-              Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
+                Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ
+                Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
               </h4>
               <p>Tháng 12 2024, 3 Bình luận </p>
             </Link>
@@ -511,7 +575,8 @@ const Home = () => {
                 className="w-100 rounded-3"
               />
               <h4 className="mt-4">
-              Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
+                Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ
+                Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
               </h4>
               <p>Tháng 12 2024, 3 Bình luận </p>
             </Link>
@@ -523,14 +588,14 @@ const Home = () => {
                 className="w-100 rounded-3"
               />
               <h4 className="mt-4">
-              Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
+                Nafoods Trưng Bày Sản Phẩm Tại Hội Chợ Du Lịch Quốc Tế & Hội Chợ
+                Triển Lãm Quốc Tế Quà Tặng, Quà Lưu Niệm
               </h4>
               <p>Tháng 12 2024, 3 Bình luận </p>
             </Link>
           </div>
         </div>
       </div>
-      
     </>
   );
 };
