@@ -551,7 +551,7 @@ const ProductDetails = () => {
                               <Rating
                                 name="rating"
                                 value={rating}
-                                precision={0.5}
+                                // precision={0.5}
                                 onChange={changeRating}
                               />
                             </div>

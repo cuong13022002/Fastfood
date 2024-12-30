@@ -38,6 +38,7 @@ const Header = () => {
 
   const headerRef = useRef();
   const gotoTop = useRef();
+  const gotoTop1 = useRef();
   const context = useContext(MyContext);
 
   const history = useNavigate();
@@ -56,6 +57,26 @@ const Header = () => {
     context.setIsLogin(false);
     history("/signIn");
   };
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      let position = window.pageYOffset;
+      // if (headerRef.current) {
+      //   if (position > 100) {
+      //     headerRef.current.classList.add("fixed");
+      //   } else {
+      //     headerRef.current.classList.remove("fixed");
+      //   }
+      // }
+
+      if (gotoTop1.current) {
+        if (position >= 200) {
+          gotoTop1.current.classList.add("show");
+        } else {
+          gotoTop1.current.classList.remove("show");
+        }
+      }
+    });
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -69,7 +90,7 @@ const Header = () => {
       }
 
       if (gotoTop.current) {
-        if (position > 500) {
+        if (position > 200) {
           gotoTop.current.classList.add("show");
         } else {
           gotoTop.current.classList.remove("show");
@@ -104,6 +125,12 @@ const Header = () => {
       behavior: "smooth",
     });
   };
+  const gotoTopScroll1 = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const openFilter = () => {
     context?.setIsOpenFilters(!context?.isOpenFilters);
@@ -111,11 +138,13 @@ const Header = () => {
 
   return (
     <>
-      {/* <Button className="gotoTop1">
-      <FaFacebookMessenger className="gotottop1" />
-      </Button> */}
       <Button className="gotoTop" ref={gotoTop} onClick={gotoTopScroll}>
         <FaAngleUp />
+      </Button>
+      <Button className="gotoTop1" ref={gotoTop1} onClick={gotoTopScroll1}>
+        <Link to="https://chatgpt.com/">
+          <FaFacebookMessenger className="gotottop1" />
+        </Link>
       </Button>
 
       <div className="headerWrapperFixed" ref={headerRef}>
@@ -123,10 +152,12 @@ const Header = () => {
           <div className="top-strip bg-blue">
             <div className="container">
               <div className="d-flex justify-content-between">
-                
                 <div className="d-flex text-white">
                   <div>
-                    <Link to="/" className="text-white"> Kênh người bán</Link>
+                    <Link to="/" className="text-white">
+                      {" "}
+                      Kênh người bán
+                    </Link>
                   </div>
                   &nbsp; | &nbsp;
                   <div className="">
@@ -139,7 +170,9 @@ const Header = () => {
                   </div>
                   &nbsp; | &nbsp;
                   <div className="">
-                    <Link to="/signIn" className="text-white">Đăng nhập</Link>
+                    <Link to="/signIn" className="text-white">
+                      Đăng nhập
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -156,10 +189,10 @@ const Header = () => {
                     </Button>
                   )}
 
-                   <Link to={"/"} className="d-flex align-items-center logo">
-                                  <img src={logo1} />
-                                  <span className="ml-2">FASTFOOD</span>
-                                </Link>
+                  <Link to={"/"} className="d-flex align-items-center logo">
+                    <img src={logo1} />
+                    <span className="ml-2">FASTFOOD</span>
+                  </Link>
 
                   {context.windowWidth < 992 && (
                     <div className="position-relative cartTab">
