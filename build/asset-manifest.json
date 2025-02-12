@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/deploy-github/static/css/main.71574017.css",
+    "main.js": "/deploy-github/static/js/main.5d5d9dfa.js",
+    "static/media/deliveryman.png": "/deploy-github/static/media/deliveryman.b98c5c8761b894cf9b5b.png",
+    "static/media/coupon.png": "/deploy-github/static/media/coupon.7c16d7f38907a5051dcf.png",
+    "static/media/shopping.png": "/deploy-github/static/media/shopping.6b155c2ff1ad4420d645.png",
+    "static/media/Fastfood.png": "/deploy-github/static/media/Fastfood.1692e650a085bc3150f3.png",
+    "index.html": "/deploy-github/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.71574017.css",
+    "static/js/main.5d5d9dfa.js"
+  ]
+}
