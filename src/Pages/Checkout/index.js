@@ -9,11 +9,14 @@ import { fetchDataFromApi, postData, deleteData } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
+  const [userData, setUserData] = useState([]);
   const [formFields, setFormFields] = useState({
-    fullName: "",
+    // fullName: "",
     streetAddressLine: "",
-    phoneNumber: "",
+    // phoneNumber: "",
     email: "",
+    name: "",
+    phone: "",
   });
 
   const [cartData, setCartData] = useState([]);
@@ -35,6 +38,17 @@ const Checkout = () => {
       );
     });
   }, []);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
+      setUserData(res);
+      setFormFields({
+        name: res.name,
+        email: res.email,
+        phone: res.phone,
+      });
+    });
+  }, []);
 
   const onChangeInput = (e) => {
     setFormFields(() => ({
@@ -52,45 +66,19 @@ const Checkout = () => {
     console.log(cartData);
 
     console.log(formFields);
-    if (formFields.fullName === "") {
-      context.setAlertBox({
-        open: true,
-        error: true,
-        msg: "Vui lòng nhập họ tên ",
-      });
-      return false;
-    }
 
-    if (formFields.streetAddressLine1 === "") {
-      context.setAlertBox({
-        open: true,
-        error: true,
-        msg: "Vui lòng nhập địa chỉ",
-      });
-      return false;
-    }
-
-    if (formFields.phoneNumber === "") {
-      context.setAlertBox({
-        open: true,
-        error: true,
-        msg: "Vui lòng nhập số điện thoại ",
-      });
-      return false;
-    }
-
-    if (formFields.email === "") {
-      context.setAlertBox({
-        open: true,
-        error: true,
-        msg: "Vui lòng nhập email",
-      });
-      return false;
-    }
+    // if (formFields.streetAddressLine === "") {
+    //   context.setAlertBox({
+    //     open: true,
+    //     error: true,
+    //     msg: "Vui lòng nhập địa chỉ",
+    //   });
+    //   return false;
+    // }
 
     const addressInfo = {
-      name: formFields.fullName,
-      phoneNumber: formFields.phoneNumber,
+      name: formFields.name,
+      phoneNumber: formFields.phone,
       address: formFields.streetAddressLine,
       date: new Date().toLocaleString("en-US", {
         month: "short",
@@ -102,7 +90,7 @@ const Checkout = () => {
 
     const payLoad = {
       name: addressInfo.name,
-      phoneNumber: formFields.phoneNumber,
+      phoneNumber: formFields.phone,
       address: addressInfo.address,
       amount: parseInt(totalAmount),
       email: user.email,
@@ -142,6 +130,7 @@ const Checkout = () => {
                     size="small"
                     name="fullName"
                     onChange={onChangeInput}
+                    value={formFields.name}
                   />
                 </div>
               </div>
@@ -171,6 +160,7 @@ const Checkout = () => {
                       size="small"
                       name="phoneNumber"
                       onChange={onChangeInput}
+                      value={formFields.phone}
                     />
                   </div>
                 </div>
@@ -184,6 +174,7 @@ const Checkout = () => {
                       size="small"
                       name="email"
                       onChange={onChangeInput}
+                      value={formFields.email}
                     />
                   </div>
                 </div>
